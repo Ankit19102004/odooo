@@ -1,12 +1,12 @@
-const express = require('express');
-const {
+import express from 'express';
+import {
   createExpense,
   getUserExpenses,
   getAllExpenses,
   updateExpenseStatus,
   getExpenseById
-} = require('../controllers/expenseController');
-const authMiddleware = require('../middleware/authMiddleware');
+} from '../controllers/expenseController.js';
+import authMiddleware from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
@@ -20,4 +20,4 @@ router.get('/all', getAllExpenses);
 router.get('/:id', getExpenseById);
 router.put('/:id/status', updateExpenseStatus);
 
-module.exports = router;
+export default router;

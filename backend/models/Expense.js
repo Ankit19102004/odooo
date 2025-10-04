@@ -1,5 +1,5 @@
-const { DataTypes } = require('sequelize');
-const { sequelize } = require('../config/db');
+import { DataTypes } from 'sequelize';
+import { sequelize } from '../config/db.js';
 
 const Expense = sequelize.define('Expense', {
   id: {
@@ -74,8 +74,8 @@ const Expense = sequelize.define('Expense', {
 });
 
 // Define associations
-const User = require('./User');
+import User from './User.js';
 Expense.belongsTo(User, { as: 'Employee', foreignKey: 'employeeId' });
 Expense.belongsTo(User, { as: 'ApprovedBy', foreignKey: 'approvedById' });
 
-module.exports = Expense;
+export default Expense;

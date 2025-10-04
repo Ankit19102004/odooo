@@ -1,8 +1,8 @@
-const Expense = require('../models/Expense');
-const User = require('../models/User');
+import Expense from '../models/Expense.js';
+import User from '../models/User.js';
 
 // Create expense
-const createExpense = async (req, res) => {
+export const createExpense = async (req, res) => {
   try {
     const { amount, description, category, date, receipt, notes } = req.body;
     
@@ -24,7 +24,7 @@ const createExpense = async (req, res) => {
 };
 
 // Get user's expenses
-const getUserExpenses = async (req, res) => {
+export const getUserExpenses = async (req, res) => {
   try {
     const expenses = await Expense.findAll({
       where: { employeeId: req.user.id },
@@ -43,7 +43,7 @@ const getUserExpenses = async (req, res) => {
 };
 
 // Get all expenses (for managers/admins)
-const getAllExpenses = async (req, res) => {
+export const getAllExpenses = async (req, res) => {
   try {
     const expenses = await Expense.findAll({
       include: [
@@ -61,7 +61,7 @@ const getAllExpenses = async (req, res) => {
 };
 
 // Update expense status (approve/reject)
-const updateExpenseStatus = async (req, res) => {
+export const updateExpenseStatus = async (req, res) => {
   try {
     const { id } = req.params;
     const { status, rejectionReason } = req.body;
@@ -91,7 +91,7 @@ const updateExpenseStatus = async (req, res) => {
 };
 
 // Get expense by ID
-const getExpenseById = async (req, res) => {
+export const getExpenseById = async (req, res) => {
   try {
     const expense = await Expense.findByPk(req.params.id, {
       include: [
@@ -114,12 +114,4 @@ const getExpenseById = async (req, res) => {
     console.error('Get expense by ID error:', error);
     res.status(500).json({ message: 'Server error' });
   }
-};
-
-module.exports = {
-  createExpense,
-  getUserExpenses,
-  getAllExpenses,
-  updateExpenseStatus,
-  getExpenseById
 };

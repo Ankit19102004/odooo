@@ -1,4 +1,4 @@
-const { Sequelize } = require('sequelize');
+import { Sequelize } from 'sequelize';
 
 const sequelize = new Sequelize(
   process.env.DB_NAME || 'expense_management',
@@ -32,5 +32,5 @@ const connectDB = async () => {
   }
 };
 
-module.exports = { connectDB, sequelize };
+export { connectDB, sequelize };
 

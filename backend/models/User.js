@@ -1,6 +1,6 @@
-const { DataTypes } = require('sequelize');
-const bcrypt = require('bcryptjs');
-const { sequelize } = require('../config/db');
+import { DataTypes } from 'sequelize';
+import bcrypt from 'bcryptjs';
+import { sequelize } from '../config/db.js';
 
 const User = sequelize.define('User', {
   id: {
@@ -77,4 +77,4 @@ User.prototype.comparePassword = async function(candidatePassword) {
 User.belongsTo(User, { as: 'Manager', foreignKey: 'managerId' });
 User.hasMany(User, { as: 'Subordinates', foreignKey: 'managerId' });
 
-module.exports = User;
+export default User;
